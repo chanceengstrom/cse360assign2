@@ -2,19 +2,21 @@ package assign1;
 /**
  * @author Chance Engstrom 
  * Class ID: 132
- * Assignment: 1
- * Contains methods to manipulate a integer array with size of 10
+ * Assignment: 2
+ * Contains methods to manipulate a integer array with an initial size of 10
  */
 public class SimpleList
 {
 	private int list[];
 	private int count;
+	public int maxSize;
 	/**
 	 * Constructor: Initialize private variables
 	 */
 	public SimpleList()
 	{
-		list = new int[10];
+		maxSize = 10;
+		list = new int[maxSize];
 		count = 0;
 	}
 	/**
@@ -25,15 +27,36 @@ public class SimpleList
 	{
 		if(count > 0)
 		{
-			if(count != 10)
-				count++;
-			int size = count - 1;
-			list[size] = num;
-			for(int index = 0;index < size;index++)//Pushes array elements back
+			if(count != maxSize)
 			{
-				int temp = list[index];//Swap last element with current index
-				list[index] = list[size];
-				list[size] = temp;
+				count++;
+				int size = count - 1;
+				list[size] = num;
+				for(int index = 0;index < size;index++)//Pushes array elements back
+				{
+					int temp = list[index];//Swap last element with current index
+					list[index] = list[size];
+					list[size] = temp;
+				}
+			}
+			else
+			{
+				maxSize = maxSize + maxSize/2;//Increase array size by 50%
+				int[] newList = new int[maxSize];
+				for(int index = 0; index<count;index++)
+				{
+					newList[index] = list[index];
+				}
+				list = newList;
+				count++;
+				int size = count - 1;
+				list[size] = num;
+				for(int index = 0;index < size;index++)//Pushes array elements back
+				{
+					int temp = list[index];//Swap last element with current index
+					list[index] = list[size];
+					list[size] = temp;
+				}
 			}
 		}
 		else
@@ -60,6 +83,24 @@ public class SimpleList
 				int temp = list[index];
 				list[index] = list[size];
 				list[size] = temp;
+			}
+			if(maxSize != 0 || maxSize != 1)
+			{
+				int percentageOccupied = (count * 100)/maxSize;
+				if(percentageOccupied < 25)
+				{
+					int sizeToDecrease = (maxSize/4);
+					if(sizeToDecrease == 0)
+						sizeToDecrease = 1;
+					maxSize = maxSize - sizeToDecrease;
+					
+					int[] newList = new int[maxSize];
+					for(int index = 0; index<count;index++)
+					{
+						newList[index] = list[index];
+					}
+					list = newList;
+				}
 			}
 		}
 	}
