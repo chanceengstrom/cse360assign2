@@ -9,7 +9,7 @@ public class SimpleList
 {
 	private int list[];
 	private int count;
-	public int maxSize;
+	private int maxSize;
 	/**
 	 * Constructor: Initialize private variables
 	 */
