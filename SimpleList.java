@@ -20,7 +20,7 @@ public class SimpleList
 		count = 0;
 	}
 	/**
-	 * Adds integer to list
+	 * Adds integer to the beginning of the list
 	 * @param num integer to be added
 	 */
 	public void add(int num)
@@ -43,7 +43,7 @@ public class SimpleList
 			{
 				maxSize = maxSize + maxSize/2;//Increase array size by 50%
 				int[] newList = new int[maxSize];
-				for(int index = 0; index<count;index++)
+				for(int index = 0; index<count;index++)//Create new array with new size
 				{
 					newList[index] = list[index];
 				}
@@ -62,6 +62,40 @@ public class SimpleList
 		else
 		{
 			list[count] = num;
+			count++;
+		}
+	}
+	/**
+	 * Adds integer to the end of the list
+	 * @param num integer to be added to end
+	 */
+	public void append(int num)
+	{
+		if(count > 0)
+		{
+			if(count != maxSize)
+			{
+				count++;
+				int size = count - 1;//Append element at end on list
+				list[size] = num;
+			}
+			else
+			{
+				maxSize = maxSize + maxSize/2;//Increase array size by 50%
+				int[] newList = new int[maxSize];
+				for(int index = 0; index<count;index++)//Create new array with new size
+				{
+					newList[index] = list[index];
+				}
+				list = newList;
+				count++;
+				int size = count - 1;
+				list[size] = num;
+			}
+		}
+		else
+		{
+			list[count] = num;//Append element at end on list
 			count++;
 		}
 	}
@@ -95,7 +129,7 @@ public class SimpleList
 					maxSize = maxSize - sizeToDecrease;
 					
 					int[] newList = new int[maxSize];
-					for(int index = 0; index<count;index++)
+					for(int index = 0; index<count;index++)//Create new array with new size
 					{
 						newList[index] = list[index];
 					}
@@ -105,12 +139,46 @@ public class SimpleList
 		}
 	}
 	/**
+	 * Gets first element in array
+	 * @return first element in array else return -1
+	 */
+	public int first()
+	{
+		if(count == 0)
+		{
+			return -1;
+		}
+		else
+			return list[0];
+	}
+	/**
+	 * Gets last element in array
+	 * @return last element in array else return -1
+	 */
+	public int last()
+	{
+		if(count == 0)
+		{
+			return -1;
+		}
+		else
+			return list[count-1];
+	}
+	/**
 	 * Gets number of elements in array
 	 * @return number of elements in array
 	 */
 	public int count()
 	{
 		return count;
+	}
+	/**
+	 * Gets max number of elements in array
+	 * @return max number of elements in array
+	 */
+	public int size()
+	{
+		return maxSize;
 	}
 	/**
 	 * Returns list into a string
@@ -125,6 +193,7 @@ public class SimpleList
 		output = output.trim();
 		return output;
 	}
+
 	/**
 	 * Search for an integer in the array
 	 * @param num integer to be searched for
